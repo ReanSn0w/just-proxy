@@ -1,7 +1,7 @@
 # Сборка сервера приложения
 FROM golang AS appbuilder
 ADD . /home/
-RUN cd /home/ && go build -o /app ./cmd/proxy/app.go 
+RUN cd /home/ && go build -o /app ./cmd/proxy/main.go 
 
 # Сборка контейнера для приложения
 FROM ubuntu:latest
