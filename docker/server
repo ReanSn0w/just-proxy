@@ -1,0 +1,12 @@
+# Сборка сервера приложения
+FROM golang AS appbuilder
+ADD . /home/
+RUN cd /home/ && go build -o /app ./cmd/proxy/app.go 
+
+# Сборка контейнера для приложения
+FROM ubuntu:latest
+WORKDIR /launch/
+COPY --from=appbuilder /app /launch/app
+RUN ls /launch
+EXPOSE 8080
+ENTRYPOINT ["/launch/app"]
